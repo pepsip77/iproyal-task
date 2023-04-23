@@ -2,7 +2,11 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Client\RequestException;
+use Illuminate\Http\Exception\HttpResponseException;
+use Illuminate\Validation\ValidationException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -46,5 +50,26 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $e)
+    {
+        if ($request->wantsJson()) {
+            $exception = $this->prepareException($e);
+
+            if ($exception instanceof AuthenticationException) {
+                return $this->unauthenticated($request, $exception);
+            }
+
+            if ($exception instanceof ValidationException) {
+                return response()->json([
+                    'errors' => $exception->errors(),
+                ], $exception->status);
+            }
+
+            return $exception;
+        }
+
+        return parent::render($request, $e);
     }
 }
