@@ -22,6 +22,8 @@ return new class extends Migration
                 ->on('users')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
+
+            $table->index('created_at');
         });
     }
 

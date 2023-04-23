@@ -27,4 +27,12 @@ class CurrencyRatesService
             return $this->provider->getAvailableExchangeRates();
         });
     }
+
+    public function convert(float $amount, string $currency): float
+    {
+        $rates = $this->getAvailableExchangeRates();
+        $rate = $rates[strtoupper($currency)];
+
+        return $amount * $rate;
+    }
 }
