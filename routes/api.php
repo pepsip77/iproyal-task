@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiLogin;
 use App\Http\Controllers\Statistics;
 use Illuminate\Support\Facades\Route;
 
@@ -14,4 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/statistics', Statistics::class);
+Route::get('/login', ApiLogin::class);
+Route::get('/statistics', Statistics::class)
+    ->middleware(['auth:sanctum']);

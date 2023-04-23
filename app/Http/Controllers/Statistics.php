@@ -6,6 +6,7 @@ use App\Http\Requests\StatisticsGetRequest;
 use App\Queries\StatisticsQuery;
 use App\Services\CurrencyRates\CurrencyRatesService;
 use App\DTO\Statistics as StatisticsDTO;
+use Illuminate\Http\JsonResponse;
 
 class Statistics extends Controller
 {
@@ -13,7 +14,8 @@ class Statistics extends Controller
         StatisticsGetRequest $request,
         CurrencyRatesService $service,
         StatisticsQuery $statisticsQuery
-    ) {
+    ): JsonResponse
+    {
         $params = $request->validated();
 
         $result = $statisticsQuery->setParams($params)

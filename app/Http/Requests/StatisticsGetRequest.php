@@ -8,12 +8,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StatisticsGetRequest extends FormRequest
 {
-    public function authorize(): bool
-    {
-        //@todo: authorization
-        return true;
-    }
-
     public function rules(): array
     {
         return [

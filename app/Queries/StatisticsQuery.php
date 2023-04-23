@@ -52,6 +52,7 @@ class StatisticsQuery
             ]);
 
         return $this->query
+            ->get()
             ->first()
             ->toArray();
     }
