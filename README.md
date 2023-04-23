@@ -55,4 +55,6 @@ USD currency.
 ### How to run
 - Run ```composer install```
 - Fill .env file based on .env.example
-- Run project using ```php artisan serve```
+- Seed the database using ```php artisan migrate:fresh``` command
+- Run project using ```php artisan serve``` command
+- To access statistics endpoint you'll need to get your bearer token using log in using ```/api/login``` endpoint
